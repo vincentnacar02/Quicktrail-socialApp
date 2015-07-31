@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Tabstrip Widget Example</title>
+  <meta charset="UTF-8" />
+  <style>
+    #tabstrip {
+      padding: 0em;
+      width: 75%;
+    }
+
+    .tab {
+      border-top-left-radius: 0.625em;
+      border-top-right-radius: 0.625em;
+      cursor: pointer;
+      float: left;
+      margin: 0 0.2em 0 0;
+      min-width: 3em;
+      overflow: hidden;
+      padding: 0.625em;
+      white-space: nowrap;
+    }
+
+    .activeTab {
+      background-color: #e8e8e8;
+    }
+
+    .inactiveTab {
+      background: -webkit-linear-gradient(top, #373737, #e8e8e8);
+      background: -moz-linear-gradient(top, #373737, #e8e8e8);
+      background: -ms-linear-gradient(top, #373737, #e8e8e8);
+      background: -o-linear-gradient(top, #373737, #e8e8e8);
+      background: linear-gradient(top, #373737, #e8e8e8);
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#373737', endColorstr='#e8e8e8')";
+      background-color: #a0a0a0;
+    }
+
+    .activePanel {
+      background-color: #e8e8e8;
+      border-bottom-left-radius: 0.625em;
+      border-bottom-right-radius: 0.625em;
+      clear: both;
+      display: block;
+      padding: 1em;
+    }
+
+    .inactivePanel {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="tabstrip">
+    <span>Tab 1</span>
+    <span>Tab 2</span>
+    <span>Tab 3</span>
+    <div>
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a
+    </div>
+    <div>
+      Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to
+    </div>
+    <div>
+      The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! "Now fax quiz Jack! " my brave
+    </div>
+  </div>
+  <script>
+    "use strict";
+    var tabs = document.querySelectorAll("#tabstrip > span");
+    var panels = document.querySelectorAll("#tabstrip > div");
+    var length = tabs.length;
+    var currentTab;
+    var currentPanel;
+
+    function getToggler(newTab, newPanel) {
+      return function() {
+        currentTab.className = "tab inactiveTab";
+        currentPanel.className = "inactivePanel";
+        newTab.className = "tab activeTab";
+        newPanel.className = "activePanel";
+        currentTab = newTab;
+        currentPanel = newPanel;
+      }
+    }
+
+    if (length !== panels.length)
+      throw new Error("Number of tabs (" + length + ") and number of content panels (" + panels.length + ") are not equal");
+
+    for (var i = 0; i < length; i++) {
+      var tab = tabs[i];
+      var panel = panels[i];
+
+      tab.className = "tab inactiveTab";
+      //tab.addEventListener("click", getToggler(tab, panel), false); not supported in IE8
+      tab.onclick = getToggler(tab, panel);
+      panel.className = "inactivePanel";
+    }
+
+    currentTab = tabs[0];
+    currentPanel = panels[0];
+    currentTab.className = "tab activeTab";
+    currentPanel.className = "activePanel";
+  </script>
+</body>
+</html>
